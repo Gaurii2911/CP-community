@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP Community</title>
+    <link rel="stylesheet" href="/css/index2.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Baloo+Bhaina+2&family=Bree+Serif&family=Hedvig+Letters+Serif:opsz@12..24&family=Kalnia:wght@200;300&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav id="navbar" onscroll="navscroll()">
+        <div id="logo">
+            <img src="/image/navlogo.png" alt="Coding World">
+        </div>
+        <ul> 
+            <li class="items"><a href="/html/index2.html" class="active">Home</a></li>
+            <li class="items"><a href="../stalklist/stalk.html">Stalklist</a></li>
+            <li class="items"><a href="/friends/friends.html">Friends</a></li>
+            <li class="items"><a href="../ismcommunity/ism.html">ISMcommunity</a></li>
+            <li class="items"><a href="#">Contact Us</a></li>
+            <!-- <li id="searchbox"><input type="text" id="search-box" placeholder="Search Here" onclick="click_api()"></li> -->
+            <li id="searchbox"><input type="text" id="search-box" placeholder="Search Here" ></li>
+            <!-- <li class="items"><button id="button"  onclick="click_api()"><img src="/image/searchicon.png" alt="" id="searchicon"></button></li> -->
+            <li class="items logout"><a href="#">Logout</a></li>
+
+        </ul>
+    </nav>
+    <section id="home">
+        <h1 class="h-primary">Welcome to</h1>
+        <h1 class="h-primary1" id="homehead"> Coding World</h1>
+        <p class="para">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque placeat e</p>
+        <p class="para1">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque placeat eos sapi</p>
+    </section>
+    <section id="main">
+        <section id="features">
+         
+            <div class="box1 section ">
+                <img src="../image/Profile-Transparent.png" alt="" srcset="" >
+                <h2 class="descriptionhead">Stalklist</h2>
+                <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque magni sunt provident dolor eum, non pariatur nulla assumenda eius impedit, odit minus perspiciatis consequuntur consequatur.</p>
+                  </div>
+                  <div class="box2 section">
+                      <img src="../image/friends4.com.png" alt="" srcset="">
+                      <h2 class="descriptionhead">Friends</h2>
+                      <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque magni sunt provident dolor eum, non pariatur nulla assumenda eius impedit, odit minus perspiciatis consequuntur consequatur.</p>
+                  </div>
+                  <div class="box3 section ">
+                      <img src="../image/community logo.png" alt="" srcset=""  >
+                      <h2 class="descriptionhead">ISM Community</h2>
+                      <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque magni sunt provident dolor eum, non pariatur nulla assumenda eius impedit, odit minus perspiciatis consequuntur consequatur.</p>
+                  </div>
+                  <div class="box4 section ">
+                      <img src="../image/contactus2.png" alt="" srcset=""  >
+                      <h2 class="descriptionhead">Contact us</h2>
+                     <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque magni sunt provident dolor eum, non pariatur nulla assumenda eius impedit, odit minus perspiciatis consequuntur consequatur.</p>
+                  </div>
+        </section>
+    </section>
+    <footer id="footer">
+        <div class="container">
+            <p class="item1">123-456-789</p>
+            <p class="item2">info@mysite.com</p>
+            <p class="item2">IIT(ISM)Dhanbad,826001</p>
+            <p class="item2">Jharkhand</p>
+        </div>
+        <div class="container">
+            <p id="item3"><a href="#" class="anch">Sign In</a></p>
+            <p id="item4"><a href="#" class="anch">Sign Up</a></p>
+        </div>
+        <div class="container">
+            cont3
+        </div>
+        <div class="container">
+            <p id="item5">follow us On</p>
+            <div class="imagecontainer"></div>
+            <img src="../image/fb2new.png" alt=""  id="fb"> 
+            <img src="../image/twitter2.png" alt=""  id="twitter"> 
+            <img src="../image/insta2new.png" alt=""  id="insta"> 
+        </div>
+    </footer>
+    <script type="module">
+        
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkGszuBdyX8ZBwdPNygLfEkR6b1tpQtHA",
+            authDomain: "cp-community-5c382.firebaseapp.com",
+            projectId: "cp-community-5c382",
+            storageBucket: "cp-community-5c382.appspot.com",
+            messagingSenderId: "1088755596953",
+            appId: "1:1088755596953:web:d2cb23e4b145bbb1410208"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app)
+
+        const logoutButton = document.querySelector('.logout')
+        logoutButton.addEventListener('click', () => {
+            signOut(auth)
+                .then(() => {
+                    console.log('the user signed out')
+                    window.location.href = 'index.html';
+                })
+                .catch((err) => {
+                    console.log(err.message)
+                })
+        })
+
+    </script>
+    <!-- <script type="text/javascript">
+        function preventBack() {
+            window.history.forward();
+        }
+
+        setTimeout("preventBack()", 0);
+
+        window.onunload = function () { null }; 
+    </script> -->
+
+    <script>
+        // URL of the API endpoint
+
+        //     const searchBar = document.querySelector('#search-box')
+        //     let value
+        //     searchBar.addEventListener('keydown', (e) => {
+        //         value = e.target.value
+        //         console.log(value)
+
+        //     var apiUrl = `https://codeforces.com/api/user.info?handles=${value}`;
+
+        //     // Function to fetch and display data from the API
+        //     function fetchDataAndDisplay() {
+        //       // Fetch data from the API
+        //       fetch(apiUrl)
+        //         .then(response => response.json())
+        //         .then(data => {
+        //           // Call a function to display the data on the website
+        //           displayApiData(data);
+        //         })
+        //         .catch(error => {
+        //           console.error('Error fetching data:', error);
+        //         });
+        //     }
+
+        //     // Function to display API data on the website
+        //     function displayApiData(data) {
+        //       var container = document.getElementById('home');
+
+        //       // Create an unordered list
+        //       var list = document.createElement('ul');
+
+        //       // Iterate over the data and create list items
+        //       for (var key in data) {
+        //         if (data.hasOwnProperty(key)) {
+        //           var listItem = document.createElement('li');
+        //           listItem.textContent = key + ': ' + data[key];
+        //           list.appendChild(listItem);
+        //         }
+        //       }
+
+        //       // Append the list to the container
+        //       container.appendChild(list);
+        //     }
+
+        //     // Call the function to fetch and display data
+        //     fetchDataAndDisplay();
+        // })
+
+
+//         function click_api() {
+//             const searchBar = document.querySelector('#search-box')
+//             let value
+//             searchBar.addEventListener('keydown', (e) => {
+//                 value = e.target.value
+//                 console.log(value)
+
+//                 var name = prompt("")
+//                 fetch(`https://codeforces.com/api/user.info?handles=${name}`)
+//                     .then((response) => response.json()
+//                     )
+//                     .then((response) => console.log(response))
+//                     .catch((error) => console.log(error))
+
+//             })
+// }
+
+
+
+//-------------------------------------------------------------------------- GSCUFJSHDHVJGAVBJKLKHHVG
+// var searchInput = document.getElementById('search-box');
+
+// // Add an event listener for the 'keydown' event
+// searchInput.addEventListener('keydown', (e)=>{
+//   // Check if the pressed key is Enter (keyCode 13)
+//   if (e.keyCode === 13) {
+//     // Call a function to execute the search
+//     // executeSearch();
+//     // const searchBar = document.querySelector('#search-box')
+//             let value
+//                 value = e.target.value
+//                 console.log(value)
+
+//                 // var name = prompt("")
+//                 fetch(`https://codeforces.com/api/user.info?handles=${value}`)
+//                     .then((response)=>response.json())
+                        
+//                         // window.location.href="index3.html"
+//                     .then((response) => console.log(response))
+
+//         //             .then(data => {
+//         //   // Save data to localStorage
+//         //   localStorage.setItem('userData', JSON.stringify(data));
+//         //   // Redirect to the second page
+//         //   window.location.href = 'index3.html';})
+//                     .catch((error) => console.log(error))
+            
+//                     // e.preventDefault()
+//                     // document.getElementById("search-box").value=""
+//                 }
+// });
+
+    </script>
+    <script>
+
+    function executeSearch() {
+    //   const searchInput = document.getElementById('search-box');
+    
+    var searchInput = document.getElementById('search-box');
+    searchInput.addEventListener('keydown', (e)=>{
+  if (e.keyCode === 13 ) {
+            let value
+                value = e.target.value
+                console.log(value)
+
+                fetch(`https://codeforces.com/api/user.info?handles=${value}`)
+                    .then((response)=>response.json())
+                    .then(data => {
+                        localStorage.setItem('userData', JSON.stringify(data));
+                        //   console.log(response)
+                        window.location.href = 'index3.html';
+                    })
+                    .catch((error) =>{
+                        alert(console.log(error))
+                        alert("user not found")
+                        // localStorage.setItem(alert("user not found"));
+                     } )
+              
+                }
+});
+ 
+    }
+ 
+executeSearch()
+    </script>
+
+    <!-- <script src="/js/index.js"></script> -->
+</body>
+
+</html>

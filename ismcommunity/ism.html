@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP community|ISM Community</title>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Baloo+Bhaina+2&family=Bree+Serif&family=Hedvig+Letters+Serif:opsz@12..24&family=Kalnia:wght@200;300&family=Ubuntu:wght@300&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="ism.css">
+</head>
+<body>
+    <nav id="navbar">
+        <div id="logo">
+            <img src="/image/navlogo.png" alt="Coding World">
+        </div>
+        <ul>
+            <li class="items"><a href="/html/index2.html">Home</a></li>
+            <li class="items" ><a href="/stalklist/stalk.html" >Stalklist</a></li>
+            <li class="items" ><a href="/friends/friends.html">Friends</a></li>
+            <li class="items" ><a href="/ismcommunity/ism.html"  class="active">ISMcommunity</a></li>
+            <li class="items"><a href="#">Contact Us</a></li>
+            <li  id="searchbox"><input type="text" name="" placeholder="Search Here" id="search-box"></li>
+            <li class="items logout" ><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+    <h1 id="heading">ISM Community</h1>
+    <section id="Community">
+        <button id="getbtn">get</button>
+        <!-- <h2>User Data from Firestore</h2>
+         -->
+        <div id="user-data"></div>
+
+
+    <script type="module" >
+
+        // Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import  {getAuth , createUserWithEmailAndPassword , signOut , signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getFirestore, doc, getDoc,setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField }
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCkGszuBdyX8ZBwdPNygLfEkR6b1tpQtHA",
+  authDomain: "cp-community-5c382.firebaseapp.com",
+  projectId: "cp-community-5c382",
+  storageBucket: "cp-community-5c382.appspot.com",
+  messagingSenderId: "1088755596953",
+  appId: "1:1088755596953:web:d2cb23e4b145bbb1410208"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const auth= getAuth(app)
+
+const logoutButton =document.querySelector('.logout')
+logoutButton.addEventListener('click' , () =>{
+    signOut(auth)
+    .then(()=>{
+        console.log('the user signed out')
+        window.location.href = '../html/index.html';
+    })
+    .catch((err)=>{
+        console.log(err.message)
+    })
+})
+
+// const db = getFirestore();
+
+// const signupForm = document.querySelector('.signup')
+//     signupForm.addEventListener('submit', (e) => {
+//         e.preventDefault()
+
+//         const email = signupForm.email.value
+//         const password = signupForm.password.value
+//         const College = signupForm.College.value
+//     })
+// //         var emailbox = email;
+// //         var passbox = password;
+// //         var ism =  College
+// //         var Selbtn = document.getElementById("getbtn")
+
+// //       async function getADocument() {
+// //             var ref = doc(db, "Signup", emailbox.value);
+// //             const docSnap = await getDoc(ref);
+        
+// //         if (docSnap.exists()) {
+// //             emailbox.value = docSnap.data().Userid;
+// //             passbox.value = docSnap.data().Userpass;
+// //             ism.value = docSnap.data().Usercollege;
+// //         }
+// //         else {
+// //             alert("NOs such document")
+// //         }
+// //     }
+// //     Selbtn.addEventListener("click", getADocument)
+
+</script>
+
+
+<!-- <script>
+  
+  const storedData = localStorage.getItem('userInfo');
+        // const userData = JSON.parse(storedData);
+
+        if (userInfo) {
+            // Display the data on the second page
+            const userInfoDiv = document.getElementById('community');
+            userInfoDiv.innerHTML = `
+
+        
+        <p id="name">Name: ${userInfo.result[0].email} </p>
+        <p id="rate">Rating: ${userData.result[0].rating}</p>
+        
+      `;
+        }
+
+</script> -->
+
+<!-- <script type="module" src="../authentication/signUp.js"></script> -->
+
+
+<script>
+
+    function executeSearch() {
+    //   const searchInput = document.getElementById('search-box');
+    
+    // Add an event listener for the 'keydown' event
+    var searchInput = document.getElementById('search-box');
+    searchInput.addEventListener('keydown', (e)=>{
+  // Check if the pressed key is Enter (keyCode 13)
+  if (e.keyCode === 13) {
+            let value
+                value = e.target.value
+                console.log(value)
+
+                fetch(`https://codeforces.com/api/user.info?handles=${value}`)
+                    .then((response)=>response.json())
+                    .then(data => {
+                                  localStorage.setItem('userData', JSON.stringify(data));
+                                //   console.log(response)
+                                window.location.href = '../html/index3.html';
+        })
+              
+                    .catch((error) => console.log(error))
+                }
+});
+ 
+}
+
+
+    executeSearch()
+ 
+ 
+        // import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  
+   
+        const db = getFirestore(app);
+
+        // Function to retrieve and display data from Firestore
+        async function retrieveDataFromFirestore() {
+            const querySnapshot = await getDocs(collection(db, "Signup"));
+            
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                console.log("User ID:", data.Userid);
+                console.log("Password:", data.Userpass);
+                console.log("College:", data.Usercollege);
+
+                // Display the data on the webpage as needed
+                // For example, append it to a div element
+                const userDataDiv = document.getElementById("user-data");
+                userDataDiv.innerHTML += `
+                    <p>User ID: ${data.Userid}</p>
+                    <p>Password: ${data.Userpass}</p>
+                    <p>College: ${data.Usercollege}</p>
+                    <hr>
+                `;
+            });
+        }
+
+        // Call the function to retrieve and display data
+        retrieveDataFromFirestore();
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignIn</title>
+    <link rel="stylesheet" href="signin.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Baloo+Bhaina+2&family=Bree+Serif&family=Hedvig+Letters+Serif:opsz@12..24&family=Kalnia:wght@200;300&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">    
+</head>
+</head>
+
+<body>
+    <form action="" class="signin">
+        <div class="head">
+            <img src="/image/navlogo.png" alt="">
+            <h1>CP community</h1>
+        </div>
+        <div class="style">
+            <h3>Email</h2>
+                <input type="text" id="email" placeholder="Enter your Email">
+        </div>
+        <div class="style">
+            <h3>Password</h3>
+            <input type="password" id="password" placeholder="Enter your Password">
+        </div>
+        <button class="loginup" id="btn">SignIn</button>
+        <!-- <p>Dont have Account?<a href="signup.html"> SignUp</a></p> -->
+    </form>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkGszuBdyX8ZBwdPNygLfEkR6b1tpQtHA",
+            authDomain: "cp-community-5c382.firebaseapp.com",
+            projectId: "cp-community-5c382",
+            storageBucket: "cp-community-5c382.appspot.com",
+            messagingSenderId: "1088755596953",
+            appId: "1:1088755596953:web:d2cb23e4b145bbb1410208"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app)
+
+        const loginForm = document.querySelector('.signin')
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            const email = loginForm.email.value
+            const password = loginForm.password.value
+
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((cred) => {
+                    console.log('user logged in', cred.user)
+                    window.location.href = '/html/index2.html';
+
+                })
+                .catch((err) => {
+                    console.log(err.message)
+
+                })
+        })
+    </script>
+</body>
+
+</html>

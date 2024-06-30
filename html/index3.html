@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CP community</title>
+    <link rel="stylesheet" href="../css/index3.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Baloo+Bhaina+2&family=Bree+Serif&family=Hedvig+Letters+Serif:opsz@12..24&family=Kalnia:wght@200;300&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav id="navbar">
+        <div id="logo">
+            <img src="/image/navlogo.png" alt="Coding World">
+        </div>
+        <ul>
+            <li class="items"><a href="/html/index2.html">Home</a></li>
+            <li class="items"><a href="/stalklist/stalk.html">Stalklist</a></li>
+            <li class="items"><a href="/friends/friends.html">Friends</a></li>
+            <li class="items"><a href="/ismcommunity/ism.html">ISMcommunity</a></li>
+            <li class="items"><a href="#">Contact Us</a></li>
+            <li id="searchbox"><input type="text" name="" placeholder="Search Here" id="search-box"></li>
+            <li class="items logout"><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+    <!-- <h1 id="heading">      </h1> -->
+    <section id="main">
+        <div class="members">
+            <!-- <p> <Button  id="btn" onclick="stalkbtn()">stalk<Button> -->
+            <!-- <p> <Button id="btn">stalk<Button>
+                        <p> <Button id="btn1">fire<Button>
+                                    <div id="value1">
+                        </p> -->
+            <div id="value1">
+
+            </div>
+            <button class="btn12" >Fire</button>
+        </div>
+
+        </div>
+    </section>
+
+    <script type="module">
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signOut, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkGszuBdyX8ZBwdPNygLfEkR6b1tpQtHA",
+            authDomain: "cp-community-5c382.firebaseapp.com",
+            projectId: "cp-community-5c382",
+            storageBucket: "cp-community-5c382.appspot.com",
+            messagingSenderId: "1088755596953",
+            appId: "1:1088755596953:web:d2cb23e4b145bbb1410208"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app)
+
+        const logoutButton = document.querySelector('.logout')
+        logoutButton.addEventListener('click', () => {
+            signOut(auth)
+                .then(() => {
+                    console.log('the user signed out')
+                    window.location.href = '../html/index.html';
+                })
+                .catch((err) => {
+                    console.log(err.message)
+                })
+        })
+
+
+        var searchInput = document.getElementById('search-box');
+        // const ShowData = async() => {
+            //     const {value} = searchInput;
+            //     const userData = await fetch(`https://codeforces.com/api/user.info?handles=${value}`);
+            //     console.log(userData);
+            // }
+            searchInput.addEventListener("keydown" , async(e) => {
+                const {keyCode} = e;
+                if(keyCode == 13){
+                    console.log("Hello");
+                    const {value} = searchInput;
+                    const userData = await fetch(`https://codeforces.com/api/user.info?handles=${value}`);
+                    const {result} = await userData.json();
+                    const data = result[0];
+                    console.log(data)
+                    const userInfoDiv = document.getElementById('value1');
+                    if(data){
+                        userInfoDiv.innerHTML = `
+                        ${data.titlePhoto ? `<img src="${data.titlePhoto}" alt="Title Image" width="300px" height="280px">` : ''}
+                            <p id="handle">Username: ${data.handle}</p>
+                                <p id="name">Name: ${data.firstName} ${data.lastName}</h1>
+                                <p id="rate">Rating: ${data.rating}</p>
+                            <!-- Add more properties as needed -->
+                        `;
+
+                    }else{
+                        alert("User not exist" )
+                    }
+
+
+            
+                    const storeData = document.getElementsByClassName("btn12")[0];
+                    storeData.addEventListener("click" , () => { 
+                        console.log("REday to store ")
+                    })
+
+                    
+
+            }
+        })
+
+
+
+
+
+
+
+        // searchInput.addEventListener('keydown', (e) => {
+        //     if (e.keyCode === 13) {
+        //         // executeSearch();
+        //         // const searchBar = document.querySelector('#search-box')
+        //         let value
+        //         value = e.target.value
+        //         console.log(value)
+
+        //         // var name = prompt("")
+        //         var Insbtn = document.getElementById("btn12")
+        //         fetch(`https://codeforces.com/api/user.info?handles=${value}`)
+        //             .then((response) => response.json())
+
+        //             // window.location.href="index3.html"
+        //             .then((response) => {
+        //                 console.log(response)
+        //                 const userInfoDiv = document.getElementById('value1');
+        //                 userInfoDiv.innerHTML = `
+        //                 ${response.result[0].titlePhoto ? `<img src="${response.result[0].titlePhoto}" alt="Title Image" width="300px" height="280px">` : ''}
+        //                 <p id="handle">Username: ${response.result[0].handle}</p>
+        //                  <p id="name">Name: ${response.result[0].firstName} ${response.result[0].lastName}</h1>
+        //                  <p id="rate">Rating: ${response.result[0].rating}</p>
+        //                 <!-- Add more properties as needed -->
+        //                 `;
+        //                 var Handle = response.result[0].handle
+        //                 var Name = response.result[0].firstName
+        //                 var Rating = response.result[0].rating
+        //                 async function AddDocument_CustomID() {
+        //                     console.log("Clicked");
+        //                     // var ref = doc(db, "Stalkadded", Handle.value);
+        //                     // console.log("Clicked");
+        //                     // await setDoc(
+        //                     //     ref, {
+        //                     //     Userhandle: Handle.value,
+        //                     //     User: Name.value,
+        //                     //     Userrating: Rating.value
+        //                     // }
+        //                     // )
+        //                     //     .then(() => {
+        //                     //         alert("data added successfully");
+        //                     //     })
+        //                     //     .catch((error) => {
+        //                     //         alert("Unsuccessful opertion, error:" + error);
+        //                     //     });
+        //                 }
+
+        //             })
+                    
+        //             //             .then(data => {
+        //                 //   localStorage.setItem('userData', JSON.stringify(data));
+        //             //   window.location.href = 'index3.html';})
+        //             .catch((error) => {
+        //                 console.log(error)
+        //                 alert("user not found")
+        //             })
+                    
+        //             Insbtn.addEventListener("click", () => {
+        //                 console.log("Clicked")
+        //             })
+        //         // e.preventDefault()
+        //         // document.getElementById("search-box").value=""
+        //     }
+        // })
+
+
+
+
+
+        // <!-------------------------------------------------------------------------------->
+
+
+
+    </script>
+
+
+    <!------------------------------------------------------------------------------------->
+
+    <script>
+
+        const storedData = localStorage.getItem('userData');
+        const userData = JSON.parse(storedData);
+
+        if (userData) {
+            // Display the data on the second page
+            const userInfoDiv = document.getElementById('value1');
+            userInfoDiv.innerHTML = `
+${userData.result[0].titlePhoto ? `<img src="${userData.result[0].titlePhoto}" alt="Title Image" width="300px" height="280px"> ` : ''}
+    <p>Username: ${userData.result[0].handle}</p>
+<p id="name">Name: ${userData.result[0].firstName} ${userData.result[0].lastName}</p>
+<p id="rate">Rating: ${userData.result[0].rating}</p>
+`;
+
+        }
+    </script>
+
+
+    <!-- <script>
+    // function stalkbtn(){
+        document.getElementById("btn").addEventListener("click", stalk());
+        function stalk(){
+        const storedData = localStorage.getItem('userData');
+const userData = JSON.parse(storedData);
+
+if (userData) {
+    // Display the data on the second page
+    const userInfoDiv = document.getElementById('value1');
+    userInfoDiv.innerHTML = `
+${userData.result[0].titlePhoto ? `<img src="${userData.result[0].titlePhoto}" alt="Title Image" width="300px" height="280px"> ` : ''}
+    <p>Username: ${userData.result[0].handle}</p>
+<p id="name">Name: ${userData.result[0].firstName} ${userData.result[0].lastName}</p>
+<p id="rate">Rating: ${userData.result[0].rating}</p>
+
+
+`;
+// window.location.href="../stalklist/stalk.html"
+}
+        }
+    // }
+</script> -->
+    <!-- <script type="module" src="../stalklist/stalk_index3.js"></script> -->
+
+
+    <!-- <script type="module">
+    const fetchDataBtn = document.getElementById('btn');
+
+    fetchDataBtn.addEventListener('click',async () => {
+        // Fetch data from the API (replace with your actual API endpoint)
+        let value
+                // value = e.target.value
+                console.log(value)
+        const response = await fetch(`https://codeforces.com/api/user.info?handles=${value}`);
+        const data = await response.json();
+
+        // Store the data in localStorage
+        localStorage.setItem('apiData', JSON.stringify(data));
+
+        // Navigate to the second page
+        window.location.href = '../stalklist/stalk.html';
+    });
+</script> -->
+
+
+
+</body>
+
+</html>

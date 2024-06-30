@@ -1,0 +1,106 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="cardcontainer" class="row">
+        <div class="card" style="width: 18rem; background-color: aqua; margin: top 10px;">
+            <img src=".." alt="" class="card-img-top">
+            <div class="card-body" >
+                    <h5 class="card-title" >Card title</h5>
+                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Non, sed? Ad obcaecati officiis, similique id aliquam maiores nostrum? Voluptates doloremque esse in pariatur.</p>
+                    <a href="#" class="btn btn-primary">GO somewhere</a>
+            </div>
+        </div>
+    </div>
+    <script src="searchbox.js" type="module"></script> -->
+<!-- <script type="module" src="searchbox.js"></script>
+
+</body>
+</html>  -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display JSON Object on Website</title>
+</head>
+
+<body>
+    <!-- Container to display JSON data -->
+    <div id="json-display"></div>
+
+    <script>
+        // Your JSON data
+        // var jsonString = '{"name": "John Doe", "age": 25, "city": "Example City"}';
+        const searchBar = document.querySelector('#search-box')
+        let value
+        searchBar.addEventListener('keydown', (e) => {
+            value = e.target.value
+            console.log(value)
+
+            let p1 = fetch(`https://codeforces.com/api/user.info?handles=${value}`)
+            p1.then((response) => {
+                response.json()
+            //    var stirng_api= response.json(p1)
+            } )
+            p1.then((response) => {
+                console.log(response)
+                // var myJson= JSON.stringify(stirng_api)
+                // document.getElementById("json-display").innerHTML=myJson
+                  })
+            p1.catch((error) => console.log(error))
+            // var response = JSON.stringify
+
+            // Parse the JSON string into a JavaScript object
+        //     var jsonData = JSON.parse(p1);
+
+        //     // Function to display JSON data on the website
+        //     function displayJsonData(data) {
+        //         var container = document.getElementById("json-display");
+
+        //         // Create an unordered list
+        //         var list = document.createElement("ul");
+
+        //         // Iterate over the object properties and create list items
+        //         for (var key in data) {
+        //             if (data.hasOwnProperty(key)) {
+        //                 var listItem = document.createElement("li");
+        //                 listItem.textContent = key + ": " + data[key];
+        //                 list.appendChild(listItem);
+        //             }
+        //         }
+
+        //         // Append the list to the container
+        //         container.appendChild(list);
+        //     }
+
+        //     // Display the JSON data on the website
+        //     displayJsonData(jsonData);
+        })
+
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+<!-- //         fetch( `https://codeforces.com/api/user.info?handles=${value}`)
+//            .then((response)=>response.json())
+//            .then((response)=>{
+//                console.log(response)
+               
+//             //    window.location.href="../stalklist/stalk.html"
+//         //    ithml=`
+//         //    <P>name[item].handle`
+// })
+//            .catch((error)=>console.log(error))
+// }) -->

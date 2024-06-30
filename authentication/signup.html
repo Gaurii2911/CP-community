@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="signUp.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2&family=Baloo+Bhaina+2&family=Bree+Serif&family=Hedvig+Letters+Serif:opsz@12..24&family=Kalnia:wght@200;300&family=Ubuntu:wght@300&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <form action="" class="signup">
+        <div class="head">
+            <img src="/image/navlogo.png" alt="">
+            <h1>CP community</h1>
+        </div>
+        <div class="style">
+            <h3>Email</h3>
+            <input type="text" id="email" placeholder="Enter your Email">
+        </div>
+        <div class="style pass">
+            <h3>Password</h3>
+            <input type="password" id="password" placeholder="Enter your Password">
+        </div>
+        <div class="style">
+            <h3>College </h2>
+                <input type="text" id="College" placeholder="Enter your College name">
+        </div>
+        <button id="btn">SignUp</button>
+        <div class="link">
+            <p>Already have a Account?<a href="signinredirect.html">SignIn</a></p>
+        </div>
+    </form>
+
+
+     <!-- <script type="module" src="signUp.js"> -->
+        <script type="module" >
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, addDoc, updateDoc, deleteDoc, deleteField }
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCkGszuBdyX8ZBwdPNygLfEkR6b1tpQtHA",
+            authDomain: "cp-community-5c382.firebaseapp.com",
+            projectId: "cp-community-5c382",
+            storageBucket: "cp-community-5c382.appspot.com",
+            messagingSenderId: "1088755596953",
+            appId: "1:1088755596953:web:d2cb23e4b145bbb1410208"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        const auth = getAuth(app)
+
+        const signupForm = document.querySelector('.signup')
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+            const email = signupForm.email.value
+            const password = signupForm.password.value
+            const College = signupForm.College.value
+
+
+            createUserWithEmailAndPassword(auth, email, password, College)
+                .then((cred) => {
+                    console.log('user created:', cred.user)
+                    signupForm.reset()
+                    window.location.href = '../html/index2.html';
+                })
+
+                .catch((err) => {
+                    console.log(err.message)
+
+                })
+
+        })
+
+
+        const db = getFirestore();
+        var emailbox = email;
+        var passbox = password;
+        var ism = College
+
+        var Insbtn = document.getElementById("btn")
+
+        async function AddDocument_CustomID() {
+            var ref = doc(db, "Signup", emailbox.value);
+
+            await setDoc(
+                ref, {
+                Userid: emailbox.value,
+                Userpass: passbox.value,
+                Usercollege: ism.value
+            })
+                .then(() => {
+                    // alert("data added seccessfully");
+                })
+                .catch((error) => {
+                    alert("Unsuccessful opertion, error:" + error);
+                });
+        }
+        Insbtn.addEventListener("click", AddDocument_CustomID)
+    </script> 
+
+</body>
+
+</html>
